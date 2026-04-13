@@ -9,8 +9,7 @@ import {
   Sun,
   Moon,
   Menu,
-  X,
-  Flame,
+  CalendarDays,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,7 @@ import { Button } from "@/components/ui/button";
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/workouts", label: "Workouts", icon: Dumbbell },
-  { href: "/log", label: "Log Workout", icon: Flame },
+  { href: "/calendar", label: "Calendar", icon: CalendarDays },
   { href: "/prs", label: "PR Tracker", icon: Trophy },
   { href: "/meals", label: "Meal Plans", icon: UtensilsCrossed },
   { href: "/grocery", label: "Grocery List", icon: ShoppingCart },

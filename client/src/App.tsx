@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/lib/theme";
 import Layout from "@/components/layout";
 import Dashboard from "@/pages/dashboard";
 import Workouts from "@/pages/workouts";
-import LogWorkout from "@/pages/log-workout";
+import Calendar from "@/pages/calendar";
 import PRTracker from "@/pages/pr-tracker";
 import Meals from "@/pages/meals";
 import Grocery from "@/pages/grocery";
@@ -20,7 +20,7 @@ function AppRouter() {
       <Switch>
         <Route path="/" component={Dashboard} />
         <Route path="/workouts" component={Workouts} />
-        <Route path="/log" component={LogWorkout} />
+        <Route path="/calendar" component={Calendar} />
         <Route path="/prs" component={PRTracker} />
         <Route path="/meals" component={Meals} />
         <Route path="/grocery" component={Grocery} />
