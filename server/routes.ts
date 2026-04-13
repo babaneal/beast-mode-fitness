@@ -1,12 +1,11 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, db } from "./storage";
-import { exercises, workoutLogs, personalRecords, insertWorkoutLogSchema, insertPersonalRecordSchema } from "@shared/schema";
-import { sql } from "drizzle-orm";
+import { exercises, insertWorkoutLogSchema, insertPersonalRecordSchema } from "@shared/schema";
 
 // Seed exercises on startup
-function seedExercises() {
-  const existing = db.select().from(exercises).all();
+async function seedExercises() {
+  const existing = await db.select().from(exercises);
   if (existing.length > 0) return;
 
   const exerciseData = [
@@ -60,9 +59,7 @@ function seedExercises() {
     { name: "Plank", muscleGroup: "abs", category: "legs" },
   ];
 
-  for (const ex of exerciseData) {
-    db.insert(exercises).values(ex).run();
-  }
+  await db.insert(exercises).values(exerciseData);
 }
 
 export async function registerRoutes(
@@ -70,7 +67,7 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
   // Seed on startup
-  seedExercises();
+  await seedExercises();
 
   // === EXERCISES ===
   app.get("/api/exercises", async (_req, res) => {

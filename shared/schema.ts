@@ -1,31 +1,31 @@
-import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
+import { pgTable, text, integer, serial, doublePrecision } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 // Exercises library - pre-populated with PPL exercises
-export const exercises = sqliteTable("exercises", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const exercises = pgTable("exercises", {
+  id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  muscleGroup: text("muscle_group").notNull(), // chest, back, shoulders, biceps, triceps, quads, hamstrings, calves, abs, compound
-  category: text("category").notNull(), // push, pull, legs
+  muscleGroup: text("muscle_group").notNull(),
+  category: text("category").notNull(),
 });
 
 // Workout log entries - tracks each set
-export const workoutLogs = sqliteTable("workout_logs", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const workoutLogs = pgTable("workout_logs", {
+  id: serial("id").primaryKey(),
   exerciseId: integer("exercise_id").notNull(),
-  date: text("date").notNull(), // ISO date string YYYY-MM-DD
+  date: text("date").notNull(),
   sets: integer("sets").notNull(),
   reps: integer("reps").notNull(),
-  weight: real("weight").notNull(), // in lbs
+  weight: doublePrecision("weight").notNull(),
   notes: text("notes"),
 });
 
 // Personal records
-export const personalRecords = sqliteTable("personal_records", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const personalRecords = pgTable("personal_records", {
+  id: serial("id").primaryKey(),
   exerciseId: integer("exercise_id").notNull(),
-  weight: real("weight").notNull(),
+  weight: doublePrecision("weight").notNull(),
   reps: integer("reps").notNull(),
   date: text("date").notNull(),
 });
