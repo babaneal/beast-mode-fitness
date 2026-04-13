@@ -19,7 +19,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Trash2, Plus, Trophy, ChevronDown } from "lucide-react";
+import { Trash2, Plus, Trophy, ChevronDown, Timer, Bike, Dumbbell as DumbbellIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import type { Exercise, WorkoutLog } from "@shared/schema";
@@ -448,6 +448,12 @@ export default function Workouts() {
                 </div>
               </CardHeader>
               <CardContent>
+                {/* Pre-workout reminder */}
+                <div className="mb-4 flex items-center gap-2 text-xs text-muted-foreground bg-yellow-500/10 border border-yellow-500/20 rounded-lg px-3 py-2">
+                  <Timer className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
+                  <span><span className="font-semibold text-yellow-400">Warm-up:</span> 5 min incline treadmill walk + dynamic stretches. Then 2-3 warm-up sets before first heavy lift (bar×15 → 50%×10 → 75%×5)</span>
+                </div>
+
                 <div className="space-y-0 divide-y divide-border">
                   {workout.exercises.map((ex, i) => (
                     <div
@@ -468,6 +474,12 @@ export default function Workouts() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Post-workout reminder */}
+                <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground bg-green-500/10 border border-green-500/20 rounded-lg px-3 py-2">
+                  <Bike className="w-3.5 h-3.5 text-green-400 shrink-0" />
+                  <span><span className="font-semibold text-green-400">Post-workout:</span> 15-20 min LISS cardio (incline walk or stationary bike) to maximize fat burning. Keep HR 120-140 BPM.</span>
                 </div>
 
                 {/* Inline log section */}
